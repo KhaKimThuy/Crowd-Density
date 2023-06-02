@@ -51,6 +51,8 @@ def proc(
         print('=========== Please choose a video ==============')
         sys.exit()
 
+
+    print("====================== SOURCE+++: ", source)
     points, view_mask = focus_on_region(source)
     density_label = ["Level 1", "Level 2", "Level 3", "Level 4", 'Level 5']
     areaROI = cal_ROI(points)
@@ -134,10 +136,16 @@ def proc(
 def transmit(sid):
     global result
     params = result
-    params['monitor'] = params['source'].split("\\")[-1]
+    if params['source'] != "0":
+        params['monitor'] = params['source'].split("\\")[-1]
+        params['source'] = os.path.join(source_folder, params['source'])
+    else:
+        params['monitor'] = params['source']
+        params['source'] = int(params['source'])
+
     socketio.emit('monitor_request', {"sid":sid, 'monitor': params['monitor']}, namespace='/admin')
-    params['source'] = os.path.join(source_folder, params['source'])
-    print(params['source'])
+
+
     # params['clf_weights'] = r'D:\DL\torch\acc_85_75_frames.h5'
     # params['transform'] = r'D:\DL\torch\lstm_scaler_2.bin'
     params['sid'] = sid

@@ -129,7 +129,6 @@ def run(
             qualityLevel = 0.6,
             minDistance = 5,
             blockSize = 4),
-        vid_stride=1
 ):
     points, view_mask = focus_on_region(source)
     density_label = ["Level 1", "Level 2", "Level 3", "Level 4", 'Level 5']
@@ -340,5 +339,5 @@ def extract_features(folder):
 
 # if __name__ == "__main__":
 #     # extract_features(r"D:\NCKH\tempo\yolov5\vids\orin_cut_vids")
-#     run(source="D:/NCKH/tempo/local_backup/vids/cro_me.mp4", clf_weights=r'D:\DL\torch\acc_85_75_frames.h5', transform=r'D:\DL\torch\lstm_scaler_2.bin', vid_stride=1)
-#     # run(source=r"D:\NCKH\tempo\yolov5\vids\cro_me.mp4", clf_weights=r'D:\NCKH\tempo\yolov5\svm\lgbm.sav', transform=r'D:\DL\torch\lstm_scaler.bin')
+#     # run(source="D:/NCKH/tempo/local_backup/vids/cro_me.mp4", clf_weights=r'D:\NCKH\working\transform_&_weight\acc_85_75_frames.h5', transform=r'D:\NCKH\working\transform_&_weight\lstm_scaler_2.bin', vid_stride=1)
+#     run(source=0, clf_weights=r'D:\NCKH\working\transform_&_weight\acc_85_75_frames.h5', transform=r'D:\NCKH\working\transform_&_weight\lstm_scaler_2.bin')

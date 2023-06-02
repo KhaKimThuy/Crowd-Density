@@ -35,6 +35,7 @@ $(document).ready(function(){
         killBtn.onclick = () => {
             console.log("Button "+killBtn.id+" clicked!");
             socket.emit('cancel_task', {'client_id':killBtn.id});
+            socket.emit('disconnect');
         }
 
         const client = document.createElement('p');
