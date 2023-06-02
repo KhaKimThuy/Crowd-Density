@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kha Kim Thuy</title>
+    </head>
+    <body>
+        <h1>Please input parameters (0 to 100): </h1>
+        <form action={{domain}} method="POST">
+                <!-- <form action="http://192.168.1.5:9099/" method="POST"> -->
+                <table>
+
+                <tr>
+                    <td align="right">Source</td>
+                    <td align="left">
+                        <select name="source">
+                            {% for vid in files %}
+                                <option value="{{src}}/{{vid}}">{{vid}}</option>
+                            {% endfor%}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="right"><input type="submit" value="GO"/></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

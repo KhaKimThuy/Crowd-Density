@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+      .wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      .monitor{
+        width: 45vw;
+        height: 65vh;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+      .box{
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+      }
+      .box-text{
+        padding: 0.5rem;
+        box-sizing: border-box;
+        height: fit-content;
+        width: 100%;
+        margin: 1.5rem 0;
+        background-color: rgb(58, 171, 103);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+      h3{
+        margin: 0;
+      }
+      button {
+        margin-top: 20px;
+      }
+      .align-btn{
+        display: flex;
+      }
+    </style>
+</head>
+<body>
+  <h1 style="text-align: center;">MONITORING AREA</h1>
+  <h1 id="ip" hidden>{{ip}}</h1>
+  <div id="display" class="wrapper">
+    <!-- Monitor field -->
+  </div>
+  <div class="align-btn">
+    <button class='btn btn-success' id="more">Choose more parking lot</button>
+  </div>
+  <script src="static/app.js"></script>
+</body>
+</html>
