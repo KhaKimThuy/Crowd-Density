@@ -4,14 +4,7 @@ import os
 import numpy as np
 import shutil
 import time
-from sklearn.model_selection import train_test_split
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
-from tensorflow.keras.callbacks import TensorBoard
-from sklearn.metrics import multilabel_confusion_matrix, accuracy_score
-from sklearn.model_selection import train_test_split
-from tensorflow.keras.utils import to_categorical
+
 
 
 
@@ -112,56 +105,6 @@ def label_vid(folder):
                 shutil.move(source, destination)
     except:
         print(f"\nNot label for --------- {stop}")
-
-def train(folder):
-    # PREPROCESSING DATA
-    DATA_PATH = os.path.join(folder)
-    levels = np.array(["Feature_1", "Feature_2", "Feature_3", "Feature_4"])
-    label_map = {label:num for num, label in enumerate(levels)}
-
-    sequences, labels = [], []
-    for level in levels:
-        no_sequences = os.listdir(os.path.join(DATA_PATH, level))
-        for sequence in no_sequences:
-            window = []
-            for frame_num in range(len(os.listdir(os.path.join(DATA_PATH, level, sequence)))):
-                res = np.load(os.path.join(DATA_PATH, level, sequence, "{}.npy".format(frame_num)))
-                window.append(res)
-            sequences.append(window)
-            labels.append(label_map[level])
-
-    X = np.array(sequences)
-    y = to_categorical(labels).astype(int)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05)
-
-
-    log_dir = os.path.join('Logs')
-    tb_callback = TensorBoard(log_dir=log_dir)
-
-    _, v1, v2 = X.shape
-
-    model = Sequential()
-    model.add(LSTM(64, return_sequences=True, activation='relu', input_shape=(v1, v2)))
-    model.add(LSTM(128, return_sequences=True, activation='relu'))
-    model.add(LSTM(64, return_sequences=False, activation='relu'))
-    model.add(Dense(64, activation='relu'))
-    model.add(Dense(32, activation='relu'))
-    model.add(Dense(levels.shape[0], activation='softmax'))
-
-    model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-    model.fit(X_train, y_train, epochs=2000, callbacks=[tb_callback])
-
-    try:
-        model.summary()
-    except:
-        print(model.summary())
-
-    model.save('action.h5')
-    yhat = model.predict(X_test)
-    ytrue = np.argmax(y_test, axis=1).tolist()
-    yhat = np.argmax(yhat, axis=1).tolist()
-    print(multilabel_confusion_matrix(ytrue, yhat))
-    print(f'ACCURACY: {accuracy_score(ytrue, yhat)}')
 
 
 

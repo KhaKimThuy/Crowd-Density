@@ -333,7 +333,6 @@ def extract_features(folder):
                 os.makedirs(feature_folder, exist_ok=True)
                 data_prepare(source=os.path.join(folder, label_folder, vid), save_f=feature_folder, clf_weights=r'D:\NCKH\tempo\yolov5\svm\lgbm.sav', transform=r'D:\NCKH\tempo\yolov5\transform\lgbm_scaler.bin')
                 os.remove(os.path.join(folder, label_folder, vid))
-
     except:
         print(f'Proccessing for ./{label_folder}/{vid} is stoped +.+')
 
